@@ -2,7 +2,7 @@ const productSchema = require( "../model/Products" )
 const getAllProducts = async ( req, res ) =>
 {
     const allProducts = await productSchema.find( {} ).exec()
-    res.status(200).json({ allProducts } )
+    res.status(200).json({ "Products":allProducts } )
 }
 const AddNewProduct = async ( req, res ) =>
 {
