@@ -1,0 +1,85 @@
+#Auth Api
+
+http://localhost:3500/reg  For Register New User:
+Json=>{"username","email","phone","password","confirmPassword"},
+status:201,
+response => {name,email,phone}
+
+http://localhost:3500/login For User Login:
+Json=>{"email","phone","password"},
+status:200,
+response => {name,email,phone,roles,token}
+
+http://localhost:3500/forget For Sending Password Recovery For User:
+Json=>{"email"},
+state:200 
+
+http://localhost:3500/reset For Checking User Reset Password:
+Json=>{"OTP","email"},
+status:200,
+response => {id}
+
+http://localhost:3500/update_password For Update Password :
+
+Json=> {"id","newPassword"},
+status:200
+
+http://localhost:3500/logout For Logout User Method => Get
+
+http://localhost:3500/report For Report:
+Json=>{"name","phone","position","message"},
+status:201
+
+
+# Product Api
+http://localhost:3500/products For Get All Products:
+req => headers = authorization,
+Method => Get,
+response => All Products ,
+status : 200 
+
+http://localhost:3500/products/add For Add New Product :
+req => headers = authorization,
+Method => Post,
+Json=>{ name, flavor, price, quantity, weight, validDate, expDate }
+file => productImg
+status => 201
+
+http://localhost:3500/products/update/:id For Add New Product :
+req => headers = authorization,
+params => productId,
+Method => Put,
+Json=>{ name, flavor, price, quantity, weight, validDate, expDate }
+file => productImg
+status => 201
+
+http://localhost:3500/products/del/:productId For Delete Product :
+req => headers = authorization,
+params => productId,
+Method => delete
+status => 200
+
+#Cart Api 
+
+http://localhost:3500/userCart/:userId for Get All Products in User Cart:
+
+req => headers = authorization,
+params => userId,
+Method => get
+status => 200
+
+http://localhost:3500/addToCart/:userId for Add Product To Cart:
+
+req => headers = authorization,
+params => userId,
+Json=>{ productId, quantity}
+Method => post
+status => 200
+
+http://localhost:3500/delToCart/:userId for Delete Product From  Cart:
+
+req => headers = authorization,
+params => userId,
+Json=>{productId}
+Method => delete
+status => 200
