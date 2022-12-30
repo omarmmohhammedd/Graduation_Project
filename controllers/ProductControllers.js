@@ -7,21 +7,22 @@ const getAllProducts = async ( req, res ) =>
 const AddNewProduct = async ( req, res ) =>
 {
   const { name, flavor, price, quantity, weight, validDate, expDate } = req.body
-  console.log(name)
-    const imgPath = req.file && req.file.path
-    if ( !name || !flavor || !price || !quantity || !weight || !validDate || !expDate ) res.json( { "message": "All Fields Are Required " } ).status( 400 )
-    try
+    const imgPath = req.file && req.file.path 
+  if (!name || !flavor || !price || !quantity || !weight || !validDate || !expDate) res.status(400).json({ "message": "All Fields Are Required " })
+  else {
+     try
     {
         const duplicate = await productSchema.findOne( { name: name, price: price } ).exec()
         if ( !duplicate )
         {
-            await productSchema.create( {name,flavor,price,quantity,weight,validDate,expDate,img:"http://localhost:3500/"+imgPath} )
+            await productSchema.create( {name,flavor,price,quantity,weight,validDate,expDate,img:imgPath} )
             res.sendStatus( 201 )
         }
         else { res.status( 409 ).json( { "id": duplicate.id } ) }
-
     }
     catch (e) { console.log(e) }
+  }
+   
 }
 const updateProduct = async ( req, res ) =>
 {
@@ -59,14 +60,14 @@ const updateProduct = async ( req, res ) =>
               weight,
               validDate,
               expDate,
-              img: "http://localhost:3500/" + imgPath,
+              img:imgPath,
             }
           )
           .exec();
         res.sendStatus( 201 )
     }
-
 }
+
 const deleteProduct = async ( req, res ) =>
 {
     const { productId } = req.params;

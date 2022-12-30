@@ -16,7 +16,7 @@ const Login = async ( req, res ) =>
         if ( !checkPassword ) return res.status( 403 ).json( { "message": "Password Not Match" } )
         const token = jwt.sign( { "email": foundUser.email, "roles": foundUser.roles, "name": foundUser.name,"phone":foundUser.phone}, process.env.ACCESS_TOKEN, { expiresIn: "24h"} )
         res.cookie( "jwt", token, { httpOnly: false, maxAge: 3 * 24 * 60 * 60 * 1000 } );
-        res.status(200).json( { "username": foundUser.name, "roles": foundUser.roles, "phone": foundUser.phone ,token,"email":foundUser.email} )
+        res.status(200).json( { "username": foundUser.name, state : 200,"roles": foundUser.roles, "phone": foundUser.phone ,token,"email":foundUser.email,"id":foundUser.id} )
     }
     catch ( e ) { console.log( e.message ) }
 }

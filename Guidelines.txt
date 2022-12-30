@@ -1,3 +1,4 @@
+
 #Auth Api
 
 http://localhost:3500/reg  For Register New User:
@@ -20,7 +21,6 @@ status:200,
 response => {id}
 
 http://localhost:3500/update_password For Update Password :
-
 Json=> {"id","newPassword"},
 status:200
 
@@ -32,6 +32,7 @@ status:201
 
 
 # Product Api
+
 http://localhost:3500/products For Get All Products:
 req => headers = authorization,
 Method => Get,
@@ -41,8 +42,8 @@ status : 200
 http://localhost:3500/products/add For Add New Product :
 req => headers = authorization,
 Method => Post,
-Json=>{ name, flavor, price, quantity, weight, validDate, expDate }
-file => productImg
+Json=>{ name, flavor, price, quantity, weight, validDate, expDate },
+file => productImg,
 status => 201
 
 http://localhost:3500/products/update/:id For Add New Product :
@@ -56,30 +57,30 @@ status => 201
 http://localhost:3500/products/del/:productId For Delete Product :
 req => headers = authorization,
 params => productId,
-Method => delete
+Method => delete,
 status => 200
 
 #Cart Api 
 
-http://localhost:3500/userCart/:userId for Get All Products in User Cart:
+http://localhost:3500/products/userCart/:userId for Get All Products in User Cart:
 
 req => headers = authorization,
 params => userId,
-Method => get
+Method => get,
 status => 200
 
-http://localhost:3500/addToCart/:userId for Add Product To Cart:
+http://localhost:3500/products/addToCart/:userId for Add Product To Cart:
 
 req => headers = authorization,
 params => userId,
-Json=>{ productId, quantity}
-Method => post
+Json=>{ productId, quantity},
+Method => post,
 status => 200
 
-http://localhost:3500/delToCart/:userId for Delete Product From  Cart:
+http://localhost:3500/products/delToCart/:userId for Delete Product From  Cart:
 
 req => headers = authorization,
 params => userId,
-Json=>{productId}
-Method => delete
+Json=>{productId},
+Method => delete,
 status => 200
