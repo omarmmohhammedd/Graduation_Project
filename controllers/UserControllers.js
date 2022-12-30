@@ -23,7 +23,7 @@ const Login = async ( req, res ) =>
 const Reg = async ( req, res ) =>
 {
     const { username, email,phone, password, confirmPassword } = req.body
-    if ( !username, !email, !phone, !password, !confirmPassword ) res.json( { "message": "All Fields Are Required" } ).status( 400 )
+    if ( !username, !email, !phone, !password, !confirmPassword ) res.status( 400 ).json( { "message": "All Fields Are Required" } )
     if (password !== confirmPassword) {
         res.json( { "message": "Password Not Match" } )
     }
@@ -31,8 +31,8 @@ const Reg = async ( req, res ) =>
         try {
             const duplicateEamil = await userSchema.findOne({ email: email }).exec()
             const duplicatePhone = await userSchema.findOne({phone: phone}).exec()
-            if (duplicateEamil) res.json({ "message": "email  Already Found in" }).status(409)
-            if(duplicatePhone)res.json({ "message": "Phone  Already Found in" }).status(409)
+            if (duplicateEamil) res.status(409).json({ "message": "email  Already Found in" })
+            if(duplicatePhone)res.status(409).json({ "message": "Phone  Already Found in" })
         else {
             await userSchema.create( {
             "name": username,
@@ -69,7 +69,7 @@ const ForgetPassword = async ( req, res ) =>
     try
     {
         const findOne = await userSchema.findOne( { email: email } ).exec()
-        if ( !findOne ) return res.json( { "message": "Cant't Find Ur Email" } ).status( 403 )
+        if ( !findOne ) return res.status( 403 ).json( { "message": "Cant't Find Ur Email" } )
         const secret = VsAuthenticator.generateTOTP('JF5DOKTGFY4SKQ2QIBDTUOCPENEGUSLSKZBVC32VIQQT6SDVFJDQ')
         console.log(secret)
         const transporter = mailer.createTransport( {
@@ -126,7 +126,7 @@ const UpdatePassword = async ( req, res ) =>
 const Report = async ( req, res ) =>
 {
     const { name, position, message,phone } = req.body
-    if ( !name || !position || !message || !phone ) res.json( { "message": "All Field Required" } ).status( 400 )
+    if ( !name || !position || !message || !phone ) res.status( 400 ).json( { "message": "All Field Required" } )
     await messageSchema.create({
         "name": name,
         "position": position,

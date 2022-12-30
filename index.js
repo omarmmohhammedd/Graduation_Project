@@ -32,14 +32,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 
 // Routes 
 
-app.use('/getusers', require('./routes/UserAuth/getAllUsers'))
-app.use('/reg', require('./routes/UserAuth/Reg'))
-app.use('/login', require('./routes/UserAuth/Login'))
-app.use('/logout', require('./routes/UserAuth/Logout'))
-app.use('/forget', require('./routes/UserAuth/ForgetPassword'))
-app.use('/reset', require('./routes/UserAuth/ResetPassword'))
-app.use('/update_password', require('./routes/UserAuth/UpdatePassword'))
-app.use('/report', require('./routes/UserAuth/ReportProblem'))
+app.use('/user', require('./routes/Users'))
 app.use('/products', require('./routes/Products'))
 app.listen(PORT, () => {
   console.log(`Server Running on Port ${PORT}`)

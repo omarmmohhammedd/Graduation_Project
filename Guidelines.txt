@@ -1,32 +1,32 @@
 
 #Auth Api
 
-http://localhost:3500/reg  For Register New User:
+http://localhost:3500/user/reg  For Register New User:
 Json=>{"username","email","phone","password","confirmPassword"},
 status:201,
 response => {name,email,phone}
 
-http://localhost:3500/login For User Login:
+http://localhost:3500/user/login For User Login:
 Json=>{"email","phone","password"},
 status:200,
 response => {name,email,phone,roles,token}
 
-http://localhost:3500/forget For Sending Password Recovery For User:
+http://localhost:3500/user/forget For Sending Password Recovery For User:
 Json=>{"email"},
 state:200 
 
-http://localhost:3500/reset For Checking User Reset Password:
+http://localhost:3500/user/reset For Checking User Reset Password:
 Json=>{"OTP","email"},
 status:200,
 response => {id}
 
-http://localhost:3500/update_password For Update Password :
+http://localhost:3500/user/update_password For Update Password :
 Json=> {"id","newPassword"},
 status:200
 
-http://localhost:3500/logout For Logout User Method => Get
+http://localhost:3500/user/logout For Logout User Method => Get
 
-http://localhost:3500/report For Report:
+http://localhost:3500/user/report For Report:
 Json=>{"name","phone","position","message"},
 status:201
 
